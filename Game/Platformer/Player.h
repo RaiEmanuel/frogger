@@ -22,12 +22,13 @@
 
 // ------------------------------------------------------------------------------
 
-enum Gravity {NORMAL,INVERTED};         // tipo da gravidade
-enum StatePlayer { RUN, LOSE };         // estado do jogador, jogando ou perdeu e chama gameover
+enum StatePlayer{ RUN, LOSE };         // estado do jogador, jogando ou perdeu e chama gameover
+enum StateDirectionPlayer {LEFT, RIGHT, UP, DOWN};
 // ---------------------------------------------------------------------------------
 
 class Player : public Object
 {
+    
 private:
     TileSet * tileset = nullptr;        // folha de sprites do personagem
     Animation * anim = nullptr;         // animação do personagem
@@ -37,9 +38,10 @@ private:
     bool keyCtrlLeft = false;               // controle do pressionamento da barra de espaço
     bool keyCtrlRight = false;               // controle do pressionamento da barra de espaço
     bool keyCtrlReturn = false;               // controle do pressionamento da barra de espaço
-    
+    StateDirectionPlayer stateDirectionPlayer = UP;
 
 public:
+    uint points = 0;
     Boat* boat = nullptr;                  //bote diferente de nulo quando colidindo com um. saiu do bote zera. isso serve para pode andar ambos juntos
     StatePlayer statePlayer = RUN;
     Player();                           // construtor

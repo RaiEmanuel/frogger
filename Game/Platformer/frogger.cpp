@@ -1,13 +1,3 @@
-/**********************************************************************************
-// Platformer (Código Fonte)
-//
-// Criação:     05 Out 2011
-// Atualização: 02 Set 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Exemplo de jogo estilo platforma
-//
-**********************************************************************************/
 
 #include "Engine.h"
 #include "frogger.h"
@@ -16,32 +6,30 @@
 
 // -----------------------------------------------------------------------------
 
-Scene * Platformer::scene = nullptr;
+Scene* Frogger::scene = nullptr;
 
 // -----------------------------------------------------------------------------
 
-void Platformer::Init()
+void Frogger::Init()
 {
     // cria cena do jogo
     scene = new Scene();
-    
-   
-    
+
     //bote primeiro para ter prioridade na colisão
     boat = new Boat();
-    boat->MoveTo(window->Width() + 45.0f, 310-45-45-45);
+    boat->MoveTo(window->Width() + 45.0f, 310 - 45 - 45 - 45);
     scene->Add(boat, STATIC);
     boat->velX = -50;
-    
+
     //segundo bote
     boat2 = new Boat();
-    boat2->MoveTo(window->Width() + 45.0f, 310-45-45);
+    boat2->MoveTo(window->Width() + 45.0f, 310 - 45 - 45);
     boat2->velX = -45;
     scene->Add(boat2, STATIC);
 
     //terceiro bote
     boat3 = new Boat();
-    boat3->MoveTo(window->Width() + 45.0f, 310-45);
+    boat3->MoveTo(window->Width() + 45.0f, 310 - 45);
     boat3->velX = -55;
     scene->Add(boat3, STATIC);
 
@@ -52,11 +40,11 @@ void Platformer::Init()
     scene->Add(boat4, STATIC);
 
     //fica depois dos botes para preferência na colisão
-    backg = new Background();
+    backg = new Background("Resources/bg.png");
     scene->Add(backg, STATIC);
 
     /* obs: deletar tudo no destrutor*/
-    
+
     //maça
     fruit = new Fruit("Resources/apple.png");
     scene->Add(fruit, STATIC);
@@ -78,39 +66,57 @@ void Platformer::Init()
 
     player = new Player();
     scene->Add(player, MOVING);
-    // pano de fundo do jogo
-    /*
-    
 
-    */
 }
 
 // ------------------------------------------------------------------------------
 
-void Platformer::Update()
+void Frogger::Update()
 {
     // sai com o pressionar do ESC
     if (window->KeyDown(VK_ESCAPE))
         window->Close();
-    
+
     scene->CollisionDetection();
     // atualiza cena do jogo
     scene->Update();
 
-   if (keyCtrlReturn && window->KeyDown(VK_RETURN)) {
-       Engine::Next<GameOver>();
-       keyCtrlReturn = false;
-   }
-    if (window->KeyUp(VK_RETURN)) keyCtrlReturn = true;
+    /*if (keyCtrlReturn && window->KeyDown(VK_RETURN)) {
+        Engine::Next<GameOver>();
+        keyCtrlReturn = false;
+    }*/
+    //if (window->KeyUp(VK_RETURN)) keyCtrlReturn = true;
+    //evitar acessar objeto inválido por ter mudado para nova cena (talvez mudar para última posição resolva sem if)
     if (player->statePlayer == LOSE) {
         Engine::Next<GameOver>();
-     }
+    }
+    else {//PLAYER RUN
+        //player ainda jogando
+        if (player->points == 4) {//pegou todas as frutas
+            /* OBS: otimizar para evitar essa repetição de carregamento de sprites sempre entrando nesse if*/
+           
+            /*t.Start();
+            if (t.Elapsed(0.001f)) {
+                OutputDebugString("==================[ Acabou");
+                backg->setSprite("Resources/bg.png");
+                backg->activeWater = true;
+                //t.Stop();
+            }*/
+            backg->setSprite("Resources/bgfreeze.png");
+            backg->activeWater = false;//desativando a possibilidade de morrer em contato com a água
+            //fica depois dos botes para preferência na colisão
+            //backg = new Background("Resources/bgfreeze.png");
+            //scene->Add(backg, STATIC);
+        }
+    }
+
+    
     
 } 
 
 // ------------------------------------------------------------------------------
 
-void Platformer::Draw()
+void Frogger::Draw()
 {
     scene->Draw();
     scene->DrawBBox();
@@ -118,7 +124,7 @@ void Platformer::Draw()
 
 // ------------------------------------------------------------------------------
 
-void Platformer::Finalize()
+void Frogger::Finalize()
 {
     delete scene;
 }
@@ -135,7 +141,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // configura o motor do jogo
     engine->window->Mode(WINDOWED);
-    engine->window->Size(417, 625);
+    engine->window->Size(416, 624);
     engine->window->Color(150, 200, 230);
     engine->window->Title("Frogger");
     engine->window->Icon(IDI_ICON);
@@ -143,8 +149,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->graphics->VSync(true);
     
     // inicia o jogo
-    //int status = engine->Start(new Platformer());
-    int status = engine->Start(new Platformer());
+    int status = engine->Start(new Frogger());
+    //int status = engine->Start(new GameOver());
 
     delete engine;
     return status;

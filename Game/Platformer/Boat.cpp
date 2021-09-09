@@ -15,14 +15,11 @@
 // ---------------------------------------------------------------------------------
 Boat::Boat()
 {
-    tileset = new TileSet("Resources/boat.png", 91, 40, 1, 1);
+    tileset = new TileSet("Resources/boat.png", 80, 36, 1, 1);
     anim = new Animation(tileset, 0.120f, true);
     
-    BBox(new Rect(-15,
-        -1,
-        15,
-        0
-    ));
+    //20x20 eh bbox do player
+    BBox(new Rect(-(tileset->TileWidth()/2.0f-20.0f), -1, tileset->TileWidth() / 2.0f -20, 1));
     type = BOAT;
 }
 
@@ -50,7 +47,7 @@ void Boat::Update()
     Translate(velX * gameTime, 0);
 
     if (X() + tileset->Width() <= 0) {
-        MoveTo(window->Width() + tileset->Width()/2.0f, Y());
+        MoveTo(window->Width() + tileset->TileWidth()/2.0f, Y());
     }
 }
 

@@ -1,21 +1,8 @@
-/**********************************************************************************
-// Player (Código Fonte)
-// 
-// Criação:     20 Abr 2012
-// Atualização: 02 Set 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Define uma classe para o jogador
-//
-**********************************************************************************/
-
 #include "Player.h"
 #include "frogger.h"
 #include "engine.h"
 #include "GameOver.h"
-
 // ---------------------------------------------------------------------------------
-
 /*
 RUN - jogo rodando normal
 
@@ -24,10 +11,18 @@ RUN - jogo rodando normal
 Player::Player()
 {
     //type = TYPEOBJ
-    tileset = new TileSet("Resources/player.png", 40, 60, 1, 1);
+    tileset = new TileSet("Resources/spritePlayer.png", 40, 60, 4, 4);
     anim = new Animation(tileset, 0.120f, true);
+    uint seqLeft[1] = {0};
+    uint seqRight[1] = { 1 };
+    uint seqUp[1] = { 2 };
+    uint seqDown[1] = { 3 };
+    anim->Add(LEFT, seqLeft, 1);
+    anim->Add(RIGHT, seqRight, 1);
+    anim->Add(DOWN, seqDown, 1);
+    anim->Add(UP, seqUp, 1);
     MoveTo(window->CenterX(), window->CenterY() + 250);
-    BBox(new Rect(-20, 10, 20,30));
+    BBox(new Rect(-10,10,10,30));
     type = PLAYER;
     //statePlayer = RUN;
 }
@@ -44,15 +39,24 @@ Player::~Player()
 
 void Player::OnCollision(Object * obj)
 {
-    if (obj->type == FRUIT)
-        Platformer::scene->Remove(obj, STATIC);
+    if (obj->type == FRUIT) {
+        Frogger::scene->Remove(obj, STATIC);
+        ++points;
+    }
 
+    //essa colisão é analisada primeiro devido a ordem de adição na scene
     if (obj->type == BOAT) {
         boat = (Boat*)obj;
     }
 
     if (obj->type == WATER && boat == nullptr) {
-        statePlayer = LOSE;
+        Background *bg = (Background*) obj;
+        
+        //água ativa faz player perder em contato com a água
+        if(bg->activeWater)
+            statePlayer = LOSE;
+        else 
+            statePlayer = RUN;
     }
 }
 
@@ -69,27 +73,33 @@ void Player::Update()
     /* Controla tecla para cima */
     if (keyCtrlUp && window->KeyDown(VK_UP)) {
         keyCtrlUp = false;
+        stateDirectionPlayer = UP;
         Translate(0, -40, 0);
     }
     if (window->KeyUp(VK_UP)) keyCtrlUp = true;
     /* Controla tecla para baixo */
     if (keyCtrlDown && window->KeyDown(VK_DOWN)) {
         keyCtrlDown = false;
+        stateDirectionPlayer = DOWN;
         Translate(0, 40, 0);
     }
     if (window->KeyUp(VK_DOWN)) keyCtrlDown = true;
     /* Controla tecla para baixo */
     if (keyCtrlLeft && window->KeyDown(VK_LEFT)) {
         keyCtrlLeft = false;
+        stateDirectionPlayer = LEFT;
         Translate(-40, 0, 0);
     }
     if (window->KeyUp(VK_LEFT)) keyCtrlLeft = true;
     /* Controla tecla para direita */
     if (keyCtrlRight && window->KeyDown(VK_RIGHT)) {
         keyCtrlRight = false;
+        stateDirectionPlayer = RIGHT;
         Translate(40, 0, 0);
     }
     if (window->KeyUp(VK_RIGHT)) keyCtrlRight = true;
+    anim->Select(stateDirectionPlayer);
+    anim->NextFrame();
 }
 
 // ---------------------------------------------------------------------------------
