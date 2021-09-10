@@ -11,12 +11,33 @@ Scene* GameOver::scene = nullptr;
 
 // -----------------------------------------------------------------------------
 
+GameOver::GameOver(int points) {
+    pointsPlayer = points;
+}
+
 void GameOver::Init()
 {
     // cria cena do jogo
     scene = new Scene();
     //fica depois dos botes para preferência na colisão
-    bg = new BackgroundGameOver("Resources/bggameover0.png");
+    switch (pointsPlayer) {
+    case 0:
+        bg = new BackgroundGameOver("Resources/bggameover0.png");
+        break;
+    case 1:
+        bg = new BackgroundGameOver("Resources/bggameover1.png");
+        break;
+    case 2:
+        bg = new BackgroundGameOver("Resources/bggameover2.png");
+        break;
+    case 3:
+        bg = new BackgroundGameOver("Resources/bggameover3.png");
+        break;
+    case 4:
+        bg = new BackgroundGameOver("Resources/bggameover4.png");
+        break;
+    }
+    
     scene->Add(bg, STATIC);
 }
 

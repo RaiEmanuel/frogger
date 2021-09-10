@@ -62,6 +62,17 @@ public:
             game->Init();
         }
     };
+    template<class T>
+    static void Next(int points)                   // muda para próximo nível do jogo
+    {
+        if (game)
+        {
+            game->Finalize();
+            delete game;
+            game = new T(points);
+            game->Init();
+        }
+    };
 };
 
 // ---------------------------------------------------------------------------------

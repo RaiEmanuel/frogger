@@ -97,7 +97,7 @@ void Frogger::Update()
     //if (window->KeyUp(VK_RETURN)) keyCtrlReturn = true;
     //evitar acessar objeto inválido por ter mudado para nova cena (talvez mudar para última posição resolva sem if)
     if (player->statePlayer == LOSE) {
-        Engine::Next<GameOver>();
+        Engine::Next<GameOver>(player->points);
     }
     else {//PLAYER RUN
         //player ainda jogando
