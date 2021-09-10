@@ -1,2 +1,12 @@
-﻿  Player.cpp
+﻿  Alien.cpp
+  Background.cpp
+  BackgroundGameOver.cpp
+  BackgroundSplashScreen.cpp
+  Boat.cpp
+  Fruit.cpp
+  GameOver.cpp
+  Player.cpp
+  SplashScreen.cpp
+  frogger.cpp
+  Gerando Código...
   Platformer.vcxproj -> C:\Users\rai_e\Desktop\frogger\Game\Debug\Platformer.exe

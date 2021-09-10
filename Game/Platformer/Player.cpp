@@ -90,28 +90,31 @@ void Player::Update()
     if (keyCtrlUp && window->KeyDown(VK_UP)) {
         keyCtrlUp = false;
         stateDirectionPlayer = UP;
-        Translate(0, -140 * gameTime);
+        Translate(0, -velY * gameTime);
     }
     if (window->KeyUp(VK_UP)) keyCtrlUp = true;
+
     /* Controla tecla para baixo */
     if (keyCtrlDown && window->KeyDown(VK_DOWN)) {
         keyCtrlDown = false;
         stateDirectionPlayer = DOWN;
-        Translate(0, 140 * gameTime);
+        Translate(0, velY * gameTime);
     }
     if (window->KeyUp(VK_DOWN)) keyCtrlDown = true;
+
     /* Controla tecla para baixo */
     if (keyCtrlLeft && window->KeyDown(VK_LEFT)) {
         keyCtrlLeft = false;
         stateDirectionPlayer = LEFT;
-        Translate(-140 * gameTime, 0);
+        Translate(-velX * gameTime, 0);
     }
     if (window->KeyUp(VK_LEFT)) keyCtrlLeft = true;
+
     /* Controla tecla para direita */
     if (keyCtrlRight && window->KeyDown(VK_RIGHT)) {
         keyCtrlRight = false;
         stateDirectionPlayer = RIGHT;
-        Translate(140 * gameTime, 0);
+        Translate(velX * gameTime, 0);
     }
     if (window->KeyUp(VK_RIGHT)) keyCtrlRight = true;
     anim->Select(stateDirectionPlayer);

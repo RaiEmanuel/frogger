@@ -28,6 +28,8 @@ private:
     bool keyCtrlRight = false;               // controle do pressionamento da barra de espaço
     bool keyCtrlReturn = false;               // controle do pressionamento da barra de espaço
     StateDirectionPlayer stateDirectionPlayer = UP;
+    int velX = 2000;
+    int velY = 2000;
 
 public:
     
