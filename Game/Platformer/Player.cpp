@@ -27,10 +27,11 @@ Player::Player()
         tileset->TileWidth() / 2,
         tileset->TileHeight() / 2
         ));*/
-        BBox(new Rect(-1 * 56 / 2,
-            -1 * 56 / 2,
-            56 / 2,
-            56 / 2
+        BBox(new Rect(-1 * 56 / 4,
+            -1 * 56 / 4,
+            //0,
+            56 / 4,
+            56 / 4
             ));
     type = PLAYER;
     //statePlayer = RUN;

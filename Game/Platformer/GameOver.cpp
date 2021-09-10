@@ -3,6 +3,7 @@
 #include "frogger.h"
 #include "Resources.h"
 #include "GameOver.h"
+#include "SplashScreen.h"
 
 // -----------------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ void GameOver::Init()
     // cria cena do jogo
     scene = new Scene();
     //fica depois dos botes para preferência na colisão
-    bg = new BackgroundGameOver("Resources/bggameover.png");
+    bg = new BackgroundGameOver("Resources/bggameover0.png");
     scene->Add(bg, STATIC);
 }
 
@@ -32,7 +33,7 @@ void GameOver::Update()
 
     if (keyCtrlReturn && window->KeyDown(VK_RETURN)) {
         keyCtrlReturn = false;
-        Engine::Next<Frogger>();
+        Engine::Next<SplashScreen>();
     }
     if (window->KeyUp(VK_RETURN)) keyCtrlReturn = true;
 }

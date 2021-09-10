@@ -1,14 +1,3 @@
-/**********************************************************************************
-// Player (Arquivo de Cabeçalho)
-// 
-// Criação:     20 Abr 2012
-// Atualização: 02 Set 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Define uma classe para o jogador 
-//
-**********************************************************************************/
-
 #ifndef _PLATFORMER_PLAYER_H_
 #define _PLATFORMER_PLAYER_H_
 

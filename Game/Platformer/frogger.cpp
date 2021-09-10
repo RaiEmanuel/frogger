@@ -3,6 +3,7 @@
 #include "frogger.h"
 #include "Resources.h"
 #include "GameOver.h"
+#include "SplashScreen.h"
 
 // -----------------------------------------------------------------------------
 
@@ -149,7 +150,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     //engine->graphics->VSync(true);
     
     // inicia o jogo
-    int status = engine->Start(new Frogger());
+    int status = engine->Start(new SplashScreen());
     //int status = engine->Start(new GameOver());
 
     delete engine;

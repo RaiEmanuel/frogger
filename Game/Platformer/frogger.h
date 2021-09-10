@@ -13,7 +13,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum TYPEOBJECT { PLAYER, FRUIT, BOAT, BALL, WATER };
+enum TYPEOBJECT { PLAYER, FRUIT, BOAT, BALL, WATER, ALIEN };
 
 class Frogger : public Game
 {
