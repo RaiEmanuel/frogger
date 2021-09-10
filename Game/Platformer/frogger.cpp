@@ -13,6 +13,9 @@ Scene* Frogger::scene = nullptr;
 
 void Frogger::Init()
 {
+    /* XXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+    /*  Deletar tudo no fim          */
+    /* XXXXXXXXXXXXXXXXXXXXXXXXXXXX */
     // cria cena do jogo
     scene = new Scene();
 
@@ -68,6 +71,11 @@ void Frogger::Init()
     player = new Player();
     scene->Add(player, MOVING);
 
+    alien = new Alien(250);
+    scene->Add(alien, STATIC);
+    alien2 = new Alien(200);
+    scene->Add(alien2, STATIC);
+
 }
 
 // ------------------------------------------------------------------------------
@@ -93,18 +101,30 @@ void Frogger::Update()
     }
     else {//PLAYER RUN
         //player ainda jogando
+      
+        
         if (player->points == 4) {//pegou todas as frutas
             /* OBS: otimizar para evitar essa repetição de carregamento de sprites sempre entrando nesse if*/
-           
-            /*t.Start();
-            if (t.Elapsed(0.001f)) {
-                OutputDebugString("==================[ Acabou");
-                backg->setSprite("Resources/bg.png");
+            if (keyCtrlTime) {
+                t.Start();
+                keyCtrlTime = false;
+                stateWater = FREEZE;
+            }
+            if (stateWater == FREEZE) {
+                backg->setSprite("Resources/bgfreeze.png");
+                backg->activeWater = false;//desativando a possibilidade de morrer em contato com a água
+                if (t.Elapsed(1.5f)) {
+                    OutputDebugString("==================[ Acabou freeezzzeeeee ]");
+                    t.Stop();
+                    stateWater = NORMAL;
+                }
+            }
+            else {
+                backg->setSprite("Resources/background.png");
                 backg->activeWater = true;
-                //t.Stop();
-            }*/
-            backg->setSprite("Resources/bgfreeze.png");
-            backg->activeWater = false;//desativando a possibilidade de morrer em contato com a água
+            }
+            
+            
             //fica depois dos botes para preferência na colisão
             //backg = new Background("Resources/bgfreeze.png");
             //scene->Add(backg, STATIC);
@@ -120,7 +140,7 @@ void Frogger::Update()
 void Frogger::Draw()
 {
     scene->Draw();
-    scene->DrawBBox();
+    //scene->DrawBBox();
 } 
 
 // ------------------------------------------------------------------------------

@@ -10,10 +10,12 @@
 #include "Player.h"
 #include "Fruit.h"
 #include "Boat.h"
+#include "Alien.h"
 
 // ------------------------------------------------------------------------------
 
 enum TYPEOBJECT { PLAYER, FRUIT, BOAT, BALL, WATER, ALIEN };
+enum STATEWATER { NORMAL, FREEZE };
 
 class Frogger : public Game
 {
@@ -28,8 +30,12 @@ private:
     Boat* boat3 = nullptr;
     Boat* boat4 = nullptr;
     Background * backg = nullptr;
+    Alien* alien = nullptr;
+    Alien* alien2 = nullptr;
     bool keyCtrlReturn = false;      // controle do pressionamento da barra de espaço
-    Timer t; //controla tempo dos especiais
+    bool keyCtrlTime = true;               // controle do disparo do relógio. true para disparar relógio, assim ue conseguir os 4 pontos
+    Timer t; //temporizazdor
+    STATEWATER stateWater = NORMAL;
 public:
     static Scene * scene;           // gerenciador de cena
 

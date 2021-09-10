@@ -30,6 +30,7 @@ private:
     StateDirectionPlayer stateDirectionPlayer = UP;
 
 public:
+    
     uint points = 0;
     Boat* boat = nullptr;                  //bote diferente de nulo quando colidindo com um. saiu do bote zera. isso serve para pode andar ambos juntos
     StatePlayer statePlayer = RUN;

@@ -2,6 +2,8 @@
 #include "frogger.h"
 #include "engine.h"
 #include "GameOver.h"
+#include <sstream>
+using namespace std;
 // ---------------------------------------------------------------------------------
 /*
 RUN - jogo rodando normal
@@ -68,6 +70,9 @@ void Player::OnCollision(Object * obj)
         else 
             statePlayer = RUN;
     }
+    if (obj->type == ALIEN) {
+        statePlayer = LOSE;
+    }
 }
 
 // ---------------------------------------------------------------------------------
@@ -79,37 +84,37 @@ void Player::Update()
         Translate(boat->velX * gameTime, 0);
     }
     boat = nullptr;//garante que só tem o bote se estiver colidindo
+    //OutputDebugString("==================== tempo 1s");
 
     /* Controla tecla para cima */
     if (keyCtrlUp && window->KeyDown(VK_UP)) {
         keyCtrlUp = false;
         stateDirectionPlayer = UP;
-        Translate(0, -40, 0);
+        Translate(0, -140 * gameTime);
     }
     if (window->KeyUp(VK_UP)) keyCtrlUp = true;
     /* Controla tecla para baixo */
     if (keyCtrlDown && window->KeyDown(VK_DOWN)) {
         keyCtrlDown = false;
         stateDirectionPlayer = DOWN;
-        Translate(0, 40, 0);
+        Translate(0, 140 * gameTime);
     }
     if (window->KeyUp(VK_DOWN)) keyCtrlDown = true;
     /* Controla tecla para baixo */
     if (keyCtrlLeft && window->KeyDown(VK_LEFT)) {
         keyCtrlLeft = false;
         stateDirectionPlayer = LEFT;
-        Translate(-40, 0, 0);
+        Translate(-140 * gameTime, 0);
     }
     if (window->KeyUp(VK_LEFT)) keyCtrlLeft = true;
     /* Controla tecla para direita */
     if (keyCtrlRight && window->KeyDown(VK_RIGHT)) {
         keyCtrlRight = false;
         stateDirectionPlayer = RIGHT;
-        Translate(40, 0, 0);
+        Translate(140 * gameTime, 0);
     }
     if (window->KeyUp(VK_RIGHT)) keyCtrlRight = true;
     anim->Select(stateDirectionPlayer);
     anim->NextFrame();
 }
-
-// ---------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
