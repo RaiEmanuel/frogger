@@ -19,7 +19,7 @@ Background::Background(string fileName)
 {
     bgSprite = new Sprite(fileName);
     //152 hardcode da alura, +180 porue é a altura da imagem da água
-    BBox(new Rect(0,152,window->Width(),152+180));
+    BBox(new Rect(0,90,window->Width(),90+260));
     type = WATER;
 }
 

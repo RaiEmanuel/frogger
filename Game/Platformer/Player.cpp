@@ -11,18 +11,27 @@ RUN - jogo rodando normal
 Player::Player()
 {
     //type = TYPEOBJ
-    tileset = new TileSet("Resources/spritePlayer.png", 40, 60, 4, 4);
+    tileset = new TileSet("Resources/spriteSheetPlayer.png", 56, 56, 4, 4);
     anim = new Animation(tileset, 0.120f, true);
-    uint seqLeft[1] = {0};
-    uint seqRight[1] = { 1 };
-    uint seqUp[1] = { 2 };
+    uint seqLeft[1] = {1};
+    uint seqRight[1] = { 2 };
+    uint seqUp[1] = { 0 };
     uint seqDown[1] = { 3 };
     anim->Add(LEFT, seqLeft, 1);
     anim->Add(RIGHT, seqRight, 1);
     anim->Add(DOWN, seqDown, 1);
     anim->Add(UP, seqUp, 1);
     MoveTo(window->CenterX(), window->CenterY() + 250);
-    BBox(new Rect(-10,10,10,30));
+    /*BBox(new Rect(-1 * tileset->TileWidth() / 2,
+        -1 * tileset->TileHeight() / 2,
+        tileset->TileWidth() / 2,
+        tileset->TileHeight() / 2
+        ));*/
+        BBox(new Rect(-1 * 56 / 2,
+            -1 * 56 / 2,
+            56 / 2,
+            56 / 2
+            ));
     type = PLAYER;
     //statePlayer = RUN;
 }

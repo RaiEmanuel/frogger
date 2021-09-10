@@ -1,0 +1,3 @@
+﻿  Background.cpp
+C:\Users\rai_e\Desktop\frogger\Game\Platformer\Background.cpp(22,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+  Platformer.vcxproj -> C:\Users\rai_e\Desktop\frogger\Game\Debug\Platformer.exe

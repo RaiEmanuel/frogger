@@ -19,7 +19,7 @@ Fruit::Fruit(string imageName)
     anim = new Animation(tileset, 0.120f, true);
     MoveTo(window->CenterX(), window->CenterY() + 150);
     BBox(new Rect(-15,
-        0,
+        -15,
         15,
         15
         ));

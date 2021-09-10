@@ -40,7 +40,7 @@ void Frogger::Init()
     scene->Add(boat4, STATIC);
 
     //fica depois dos botes para preferência na colisão
-    backg = new Background("Resources/bg.png");
+    backg = new Background("Resources/background.png");
     scene->Add(backg, STATIC);
 
     /* obs: deletar tudo no destrutor*/
@@ -55,12 +55,12 @@ void Frogger::Init()
     fruit2->MoveTo(100, 500);
 
     //hamburguer
-    fruit3 = new Fruit("Resources/cake.png");
+    fruit3 = new Fruit("Resources/cabbage.png");
     scene->Add(fruit3, STATIC);
     fruit3->MoveTo(100, 400);
 
     //hamburguer
-    fruit4 = new Fruit("Resources/soup.png");
+    fruit4 = new Fruit("Resources/watermellon.png");
     scene->Add(fruit4, STATIC);
     fruit4->MoveTo(300, 400);
 
@@ -141,7 +141,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // configura o motor do jogo
     engine->window->Mode(WINDOWED);
-    engine->window->Size(416, 624);
+    engine->window->Size(704,632);
     engine->window->Color(150, 200, 230);
     engine->window->Title("Frogger");
     engine->window->Icon(IDI_ICON);
