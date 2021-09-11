@@ -1,0 +1,8 @@
+﻿  BackgroundGameOver.cpp
+C:\Users\rai_e\Desktop\frogger\Game\Platformer\frogger.h(41,16): error C2143: erro de sintaxe: ';' ausente antes de '*'
+C:\Users\rai_e\Desktop\frogger\Game\Platformer\frogger.h(41,16): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\rai_e\Desktop\frogger\Game\Platformer\frogger.h(41,33): error C2238: token(s) inesperado(s) precedendo ';'
+  GameOver.cpp
+  frogger.cpp
+  Player.cpp
+  Gerando Código...
